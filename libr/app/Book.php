@@ -8,6 +8,7 @@ class Book extends Model
 {
     public function authors()
     {
-        return $this->belongsTo('App\Author','author_id','id');
+        return $this->belongsTo('App\Author','authors_id','id');
+        //параметр 'authors_id' - для связанной таблицей (внешний ключ), 'id' - по какому параметру привязывается (?)
     }
 }
