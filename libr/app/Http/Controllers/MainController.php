@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Author;
+use App\Book;
 class MainController extends Controller
 {
     /**
@@ -13,7 +14,10 @@ class MainController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::all();
+        $authors = Author::all();
+
+        return view('main.index',compact('books','authors'));
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\DB;
 use App\Author;
+use App\Book;
 use voku\helper\ASCII;
 
 class AuthorController extends Controller
@@ -15,7 +15,8 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         // с использованием DB
         //$authors = DB::table('authors')->get();
 

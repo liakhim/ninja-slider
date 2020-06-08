@@ -3,17 +3,39 @@
 @section('content')
     <div id="main">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-6 book-card">
-                    <div class="book-card__image">
-                        <img src="http://pngimg.com/uploads/book/book_PNG51077.png" alt="Book image">
+            <div class="row col-sm-12">
+                @foreach($authors as $author)
+                    <div class="row">
+                        <h4>{{$author -> name}}</h4>
                     </div>
-                    <div class="book-card__description">
-                        <h4>Lorem ipsum</h4>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+                    <div class="row col-sm-12">
+                        @forelse ($author -> books as $item)
+                            <div class="col-lg-3 col-md-4 col-6 book-card">
+                                <div class="book-card__image">
+                                    <img src="http://pngimg.com/uploads/book/book_PNG51077.png"
+                                         alt="Book image">
+                                </div>
+                                <div class="book-card__description">
+                                    <p>{{$item -> title}}</p>
+                                </div>
+                            </div>
+                        @empty
+                            <p>У этого автора книг нет</p>
+                        @endforelse
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
 @endsection
+<!--
+    <div class="col-lg-3 col-md-4 col-6 book-card">
+                    <div class="book-card__image">
+                        <img src="http://pngimg.com/uploads/book/book_PNG51077.png" alt="Book image">
+                    </div>
+                    <div class="book-card__description">
+                        <h4>.</h4>
+                        <p>{{$author}}</p>
+                    </div>
+                </div>
+-->
