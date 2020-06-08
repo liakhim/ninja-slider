@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row col-sm-12">
                 @foreach($authors as $author)
-                    <div class="row">
+                    <div class="row col-sm-12">
                         <h4>{{$author -> name}}</h4>
                     </div>
                     <div class="row col-sm-12">

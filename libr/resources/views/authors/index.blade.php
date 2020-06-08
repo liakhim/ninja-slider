@@ -8,6 +8,8 @@
                 <span>{{$book->id}})</span>
                 <span><b>Название книги: </b>{{$book->title}}</span>
                 <span><b>Автор:</b> ({{$book->authors->name}})</span>
+                <span><a href="#">Удалить</a></span>
+                <span><a href="#">Редактировать</a></span>
             </div>
         @endforeach
         <hr>
