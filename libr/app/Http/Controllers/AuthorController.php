@@ -36,7 +36,8 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        $authors = Author::all();
+        return view('authors.create',compact('authors'));
     }
 
     /**
@@ -47,7 +48,16 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required'
+        ]);
+
+        $books = new Author([
+            'name' => $request->get('name'),
+            //'authors_id' => $request->get('author'),
+        ]);
+        $books->save();
+        return redirect('/authors')->with('success', 'Автор успешно добавлен!');
     }
 
     /**
@@ -69,7 +79,9 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $authors =Author::all();
+        $book = Book::find($id);
+        return view('authors.edit',compact('book','authors'));
     }
 
     /**
@@ -81,7 +93,17 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'author'=>'required',
+        ]);
+
+        $book = Book::find($id);
+        $book->title =  $request->get('title');
+        $book->author = $request->get('author');
+        $book->save();
+
+        return redirect('/books')->with('success', 'Книга обновлена!');
     }
 
     /**
@@ -92,6 +114,12 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $author = Author::find($id);
+        $quantity = $author->books()->count();
+        $author->books()->delete();
+        $author->delete();
+
+        return redirect('/authors')->with('success', 'Автор и его '.$quantity.' книги удалены!');
     }
 }

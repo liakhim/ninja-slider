@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Author;
+use App\Book;
+use App\Http\Resources\BookResource;
 class BookController extends Controller
 {
     /**
@@ -23,7 +25,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+
+        $authors = Author::all();
+        return view('books.create',compact('authors'));
     }
 
     /**
@@ -34,7 +38,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'author'=>'required'
+        ]);
+
+        $books = new Book([
+            'title' => $request->get('title'),
+            'authors_id' => $request->get('author'),
+        ]);
+        $books->save();
+        return redirect('/authors')->with('success', 'Книга сохранена!');
     }
 
     /**
@@ -43,9 +57,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
-        //
+
     }
 
     /**
@@ -56,7 +70,9 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::find($id);
+        $authors = Author::all();
+        return view('books.edit',compact('book','authors'));
     }
 
     /**
@@ -68,7 +84,17 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'author'=>'required',
+        ]);
+
+        $book = Book::find($id);
+        $book->title =  $request->get('title');
+        $book->authors_id = $request->get('author');
+        $book->save();
+
+        return redirect('/authors')->with('success', 'Книга обновлена!');
     }
 
     /**
@@ -79,6 +105,9 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::find($id);
+        $book->delete();
+
+        return redirect('/authors')->with('success', 'Книга удалена!');
     }
 }
