@@ -48,7 +48,7 @@ class BookController extends Controller
             'authors_id' => $request->get('author'),
         ]);
         $books->save();
-        return redirect('/authors')->with('success', 'Книга сохранена!');
+        return redirect('admin/authors')->with('success', 'Книга сохранена!');
     }
 
     /**
@@ -59,7 +59,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-
+        //
     }
 
     /**
@@ -94,7 +94,7 @@ class BookController extends Controller
         $book->authors_id = $request->get('author');
         $book->save();
 
-        return redirect('/authors')->with('success', 'Книга обновлена!');
+        return redirect('admin/authors')->with('success', 'Книга обновлена!');
     }
 
     /**
@@ -108,6 +108,6 @@ class BookController extends Controller
         $book = Book::find($id);
         $book->delete();
 
-        return redirect('/authors')->with('success', 'Книга удалена!');
+        return redirect('admin/authors')->with('success', 'Книга удалена!');
     }
 }

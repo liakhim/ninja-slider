@@ -57,7 +57,7 @@ class AuthorController extends Controller
             //'authors_id' => $request->get('author'),
         ]);
         $books->save();
-        return redirect('/authors')->with('success', 'Автор успешно добавлен!');
+        return redirect('/admin/authors')->with('success', 'Автор успешно добавлен!');
     }
 
     /**
@@ -103,7 +103,7 @@ class AuthorController extends Controller
         $book->author = $request->get('author');
         $book->save();
 
-        return redirect('/books')->with('success', 'Книга обновлена!');
+        return redirect('admin/books')->with('success', 'Книга обновлена!');
     }
 
     /**
@@ -120,6 +120,6 @@ class AuthorController extends Controller
         $author->books()->delete();
         $author->delete();
 
-        return redirect('/authors')->with('success', 'Автор и его '.$quantity.' книги удалены!');
+        return redirect('admin/authors')->with('success', 'Автор и его '.$quantity.' книги удалены!');
     }
 }

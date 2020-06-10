@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Resources\User as UserResource;
-use App\User;
-use App\Book;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,14 +21,19 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+//-------------------
 Route::get('/admin', 'AuthorController@index')->name('admin')->middleware('auth');
 
+Route::prefix('admin')->group(function () {
+    Route::resources([
+        'authors' => 'AuthorController',
+        'books' => 'BookController'
+    ]);
+});
 
-Route::resources([
-    'authors' => 'AuthorController',
-    'books' => 'BookController'
-]);
 
+//-------------------
 Route::resource('/main', 'MainController');
 
 
