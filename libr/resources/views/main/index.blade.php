@@ -5,10 +5,10 @@
         <div class="container">
             <div class="row col-sm-12">
                 @forelse($authors as $author)
-                    <div class="row col-sm-12">
+                    <div class="row col-sm-12 pt-3">
                         <h4>{{$author -> name}}</h4>
                     </div>
-                    <div class="row col-sm-12">
+                    <div class="row col-sm-12 border-bottom pb-3">
                         @forelse ($author -> books as $item)
                             <div class="col-lg-3 col-md-4 col-6 book-card">
                                 <div class="book-card__image">

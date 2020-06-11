@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Author;
 use App\Book;
-use App\Http\Resources\BookResource;
 class BookController extends Controller
 {
     /**
@@ -25,7 +24,6 @@ class BookController extends Controller
      */
     public function create()
     {
-
         $authors = Author::all();
         return view('books.create',compact('authors'));
     }
@@ -48,7 +46,7 @@ class BookController extends Controller
             'authors_id' => $request->get('author'),
         ]);
         $books->save();
-        return redirect('admin/authors')->with('success', 'Книга сохранена!');
+        return redirect('admin/')->with('success', 'Книга сохранена!');
     }
 
     /**
@@ -94,7 +92,7 @@ class BookController extends Controller
         $book->authors_id = $request->get('author');
         $book->save();
 
-        return redirect('admin/authors')->with('success', 'Книга обновлена!');
+        return redirect('admin/')->with('success', 'Книга обновлена!');
     }
 
     /**
@@ -108,6 +106,6 @@ class BookController extends Controller
         $book = Book::find($id);
         $book->delete();
 
-        return redirect('admin/authors')->with('success', 'Книга удалена!');
+        return redirect('admin/')->with('success', 'Книга удалена!');
     }
 }

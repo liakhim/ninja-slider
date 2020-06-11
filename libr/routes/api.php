@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => '/v1/books'], function () {
-    Route::get('/', 'API\BookController@index');
+    Route::get('/list', 'API\BookController@index');
     Route::get('/{id}', 'API\BookController@show');
+    Route::put('/update/{id}', 'API\BookController@update');
     Route::delete('/{id}', 'API\BookController@destroy');
 });

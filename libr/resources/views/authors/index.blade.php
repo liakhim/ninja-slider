@@ -41,16 +41,6 @@
                             <button class="btn btn-danger" type="submit"><i class="fas fa-trash text-white"></i></button>
                         </form>
                         <a class="btn btn-outline-secondary mr-3 ml-3" href="{{route('books.edit',$book)}}" class="mr-3 ml-3"><i class="fas fa-pen"></i></a>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-info dropdown-toggle text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Action
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </div>
                     </td>
                 </tr>
                 @empty

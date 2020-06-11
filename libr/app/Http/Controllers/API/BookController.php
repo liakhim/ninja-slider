@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Book;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookResource;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -15,7 +16,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        echo 'work';
+        return BookResource::collection(new BookResource(Book::all()));
     }
 
     /**
@@ -37,7 +38,11 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        echo 'id работает';
+        if (Book::where('id', $id)->exists()) {
+            return response(new BookResource(Book::find($id)),200);
+        } else {
+            return response("Book not found",404);
+        }
     }
 
     /**
@@ -49,7 +54,18 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (Book::where('id', $id)->exists()) {
+            $book = Book::find($id);
+            $book->title = is_null($request->title) ? $book->title : $request->title;
+            $book->authors_id = is_null($request->authors_id) ? $book->authors_id : $request->authors_id;
+            $book->update($request->all());
+
+            $book->save();
+
+            return response(['Update book with id='.$book->id.' is success'], 200);
+        } else {
+            return response(['Book not found'], 404);
+        }
     }
 
     /**
@@ -60,9 +76,13 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $book = Book::find($id);
-        $book->delete();
+        if (Book::where('id', $id)->exists()) {
+            $book = Book::find($id);
+            $book->delete();
 
-        return response(['message' => 'Deleted!']);
+            return response('Deleted book with id='.$book->id.' is success');
+        } else {
+            return response('Book not found');
+        }
     }
 }
